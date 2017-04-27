@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:url" content="http://www.wario.work/cas265/starwars.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="This is 'Open Graph Markup.'">
+    <meta property="og:description" content="These are the metatags you are looking for.">
+    <meta property="og:image" content="http://www.wario.work/cas265/images/star_wars_episodes_4_6.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://www.wario.work/cas265/images/star_wars_episodes_4_6.jpg">
+    <meta name="twitter:site" content="@mariojames211">
+    <title></title>
+    <!-- By removing the text in this tag jQuery fills in the info from the JSON -->
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7COpen+Sans" rel="stylesheet">
+    <link href="https://www.fontify.me/wf/6cf077b9e92f5ae4ea425062bc78f6a8" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="css/helper.css" type="text/css">
+    <link rel="stylesheet" href="css/grid.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-97175852-1', 'auto');
+      ga('send', 'pageview', location.pathname);
+    </script>
+</head>
+
+<body>
+
+    <nav>
+        <ul id="navigationList">
+            <li><a href="index.html" id="homeNav">Home</a></li>
+            <li><a href="photos.html" id="photosNav">Photos</a></li>
+            <li><a href="about.html" id="aboutNav">About</a></li>
+            <li><a href="starwars.html" id="starWarsNav">Star Wars API</a></li>
+            <li><a href="contact.html" id="contactNav">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="centerH1" id="starWarsInfo">
+        <h1 id="starWarsInfo"></h1>
+        </div>
+    </header>
+
+    <main class="swMain">
+        <div class="swEpisodes">
+            <ul>
+                <li><a href="starwars.html?film=4">The Phantom Menace</a></li>
+                <li><a href="starwars.html?film=5">Attack of the Clones</a></li>
+                <li><a href="starwars.html?film=6">Revenge of the Sith</a></li> 
+            </ul>
+            <ul>
+                <li><a href="starwars.html?film=1">A New Hope</a></li>
+                <li><a href="starwars.html?film=2">The Empire Strikes Back</a></li>
+                <li><a href="starwars.html?film=3">Return of the Jedi</a></li>
+                <li><a href="starwars.html?film=7">The Force Awakens</a></li>
+            </ul>
+        </div>
+        <h6>A long time ago in a galaxy far, far away...</h6>
+        
+        <section id="starWarsData">
+            <div class="swCrawl">
+            <h3>Episode <span id="episodeNumber"></span></h3>
+            <h2><span id="movieTitle"></span></h2>
+            <p id="openingCrawl"></p>
+            </div>
+        </section>
+        
+        <section class="swStats section group">
+            <div style="width: 343px; height: 464px; background-size: cover;" class="swPoster col span_5_of_12" id="moviePoster"></div>
+                <div class="col span_7_of_12" id="starWarsData">
+                    <h4>Directed by <span id="directedBy"></span></h4>
+                    <h4>Produced by <span id="producedBy"></span></h4>
+                    <h4>Released <span id="releaseDate"></span></h4>
+                    <!-- Each one of these is pulling data from an array. -->
+                    <h5>Featuring:</h5>
+                        <ul id="featuringX"></ul>
+                    <h5>Destinations:</h5>
+                        <ul id="planetsX"></ul>
+                    <h5>Alien species:</h5>
+                        <ul id="speciesX"></ul>
+                    <h5>Starships:</h5>
+                        <ul id="starshipsX"></ul>
+                    <h5>Vehicles:</h5>
+                        <ul id="vehiclesX"></ul>
+                    <h5>Original poster by <span class="posterCredits"><a href="http://ollymoss.com/" target="_blank">Olly Moss</a></span></h5>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2016 - <span id="currentYear">[placeholder, get the current year]</span>.</p>
+    </footer>
+    
+    <script src="js/swapi.js"></script>
+    <script src="js/themoviedb.js"></script>
+    
+    <script>
+        // This will create functionality by adding a Query String!
+        // From the D2L platform for Module09:
+        
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results === null){
+            return null;
+            } else {
+            return results[1] || 0;
+            }	
+        }
+        
+        // This if statement checks to see if urlParam is NOT null and displays pages.
+        if ($.urlParam('film') !== null) {
+            var filmParam = $.urlParam('film');
+            console.log(filmParam);
+            
+            // JavaScript Object Notation = JSON
+            // Get one film title (assumes 4 works)
+            // "obiWan" is the new object that contains a ton of JSON information.
+            // It can't be used because it's in an anonymous function.
+            swapiModule.getFilm(filmParam, function (obiWan) {
+                console.log(obiWan);
+                
+                $("title, h1").html(obiWan.title);
+                $("#movieTitle").html(obiWan.title);
+                console.log(obiWan.title);
+                
+                // Converting the episode_id to Roman Numerals with code from below: toRoman
+                $("#episodeNumber").html(toRoman(obiWan.episode_id));
+                console.log(obiWan.episode_id);
+                // OMG!!! I got it to work!
+                // I spent too much time on this and it was fairly easy solution.
+                console.log(toRoman(obiWan.episode_id));
+                
+                // These ar the <h4> items above.           
+                $("#directedBy").html(obiWan.director);
+                $("#producedBy").html(obiWan.producer);
+                console.log(obiWan.director, obiWan.producer, obiWan.release_date);
+                $("#releaseDate").html(obiWan.release_date);
+                
+                // This is <p> within the <div class="swCrawl"> above.
+                $("#openingCrawl").html(obiWan.opening_crawl);
+                
+            // Here's the section where the returned API info that is in arrays gets accessed.
+            // There is a call to the API with an anonymous function, then a second JSON object (r2d2)
+            // was created to handle the additional info and place it in tags.
+                $(obiWan.characters).each(
+                    function () {
+                        // .split("/")
+                        var character = this.split("/");
+                        // This takes up a lot of room in the console --> console.log(character);
+                        // This is an API call within an API call
+                        // A new object (r2d2) is used to pull information out of an array.
+                        // 
+                        swapiModule.getPerson(character[5], function (r2d2) {
+                            // This takes up a lot of room in the console --> console.log(r2d2.name);
+                            $("#featuringX").append("<li>" + r2d2.name + "</li>");
+                        });
+                    }
+                );
+                $(obiWan.planets).each(
+                    function () {
+                        // .split("/")
+                        var planets = this.split("/");
+                        // This takes up a lot of room in the console --> console.log(planets);
+                        // This is an API call within an API call
+                        // A new object (r2d2) is used to pull information out of an array.
+                        // 
+                        swapiModule.getPlanet(planets[5], function (r2d2) {
+                            // This takes up a lot of room in the console --> console.log(r2d2.name);
+                            $("#planetsX").append("<li>" + r2d2.name + "</li>");
+                        });
+                    }
+                );
+                $(obiWan.species).each(
+                    function () {
+                        // .split("/")
+                        var species = this.split("/");
+                        // This takes up a lot of room in the console --> console.log(species);
+                        // This is an API call within an API call
+                        // A new object (r2d2) is used to pull information out of an array.
+                        // 
+                        swapiModule.getSpecies(species[5], function (r2d2) {
+                            // This takes up a lot of room in the console --> console.log(r2d2.name);
+                            $("#speciesX").append("<li>" + r2d2.name + "</li>");
+                        });
+                    }
+                );
+                $(obiWan.starships).each(
+                    function () {
+                        // .split("/")
+                        var starships = this.split("/");
+                        // This takes up a lot of room in the console --> console.log(starships);
+                        // This is an API call within an API call
+                        // A new object (r2d2) is used to pull information out of an array.
+                        // 
+                        swapiModule.getStarship(starships[5], function (r2d2) {
+                            // This takes up a lot of room in the console --> console.log(r2d2.name);
+                            $("#starshipsX").append("<li>" + r2d2.name + "</li>");
+                        });
+                    }
+                );
+                $(obiWan.vehicles).each(
+                    function () {
+                        // .split("/")
+                        var vehicles = this.split("/");
+                        // This takes up a lot of room in the console --> console.log(vehicles);
+                        // This is an API call within an API call
+                        // A new object (r2d2) is used to pull information out of an array.
+                        // 
+                        swapiModule.getVehicle(vehicles[5], function (r2d2) {
+                            // This takes up a lot of room in the console --> console.log(r2d2.name);
+                            $("#vehiclesX").append("<li>" + r2d2.name + "</li>");
+                        });
+                    }
+                );
+            
+            var thePoster = [
+                "url(images/episode1.png)",
+                "url(images/episode2.png)",
+                "url(images/episode3.png)",
+                "url(images/episode4.png)",
+                "url(images/episode5.png)",
+                "url(images/episode6.png)",
+                "url(images/episode7.png)"
+            ]
+            
+            $("#moviePoster").on("load",
+                function () {
+                    $("#moviePoster").css("background-image", thePoster[0]);
+                });
+                    if (obiWan.episode_id === 1) {
+                        $("#moviePoster").css("background-image", thePoster[0]);
+                    }
+                    if (obiWan.episode_id === 2) {
+                        $("#moviePoster").css("background-image", thePoster[1]);
+                    }
+                    if (obiWan.episode_id === 3) {
+                        $("#moviePoster").css("background-image", thePoster[2]);
+                    }
+                    if (obiWan.episode_id === 4) {
+                        $("#moviePoster").css("background-image", thePoster[3]);
+                    }
+                    if (obiWan.episode_id === 5) {
+                        $("#moviePoster").css("background-image", thePoster[4]);
+                    }
+                    if (obiWan.episode_id === 6) {
+                        $("#moviePoster").css("background-image", thePoster[5]);
+                    }
+                    if (obiWan.episode_id === 7) {
+                        $("#moviePoster").css("background-image", thePoster[6]);
+                    }
+                }
+            );
+            
+            // The statement continues... 
+            // if the response IS null .hide hides the above structural tags
+            } else {
+                $("#moviePoster, #starWarsInfo, #starWarsData").hide();
+            }
+        
+            // Converting a number to a Roman Numeral
+            // Adapted from Piotr Berebecki via stackoverflow.com
+            // romanMatrix is the variable
+            var romanMatrix = [
+              [1000, 'M'],
+              [900, 'CM'],
+              [500, 'D'],
+              [400, 'CD'],
+              [100, 'C'],
+              [90, 'XC'],
+              [50, 'L'],
+              [40, 'XL'],
+              [10, 'X'],
+              [9, 'IX'],
+              [5, 'V'],
+              [4, 'IV'],
+              [1, 'I']
+            ];
+            // if there are no numbers, nothing happens.
+            function toRoman(num) {
+              if (num === 0) {
+                return '';
+              }
+              for (var i = 0; i < romanMatrix.length; i++) {
+                if (num >= romanMatrix[i][0]) {
+                  return romanMatrix[i][1] + toRoman(num - romanMatrix[i][0]);
+                }
+              }
+            }
+            
+    </script>
+    <script src="js/scripts.js"></script>
+    <script>
+        $("#moviePoster").on("click", function () {
+            ga('send', 'event', 'click', 'someone clicked an episode title');
+            console.log("The jQuery event worked!");
+        });
+    </script>
+</body>
+
+</html>

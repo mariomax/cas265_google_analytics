@@ -1,0 +1,346 @@
+@import 'palette.less';
+@import 'library.less';
+
+body {
+    font-family: "Libre Franklin", sans-serif;
+}
+
+nav {
+    background-color: @lessDarkColor;
+    font-weight: bold;
+    text-transform: uppercase;
+    ul {
+        li {
+            display: inline-block;
+            margin-right: -4px;
+            a {
+                display: inline-block;
+                padding: 2em;
+                text-decoration: none;
+                &:visited,
+                &:link {
+                    color: @lightColor;
+                }
+                &:hover {
+                    background-color: @color4;
+                }
+            }
+        }
+    }
+}
+
+header {
+    background-image: url(../images/background.jpeg);
+    background-position: center center;
+    background-size: cover;
+    height: 400px;
+    padding: 2em;
+    h1 {
+        .headingFont(@headingFont; 3.5em);
+        font-size: 3.5em;
+        background-color: @lightColor;
+        border-radius: 10px;
+        display: inline;
+        padding: .3em;
+    }
+    .centerH1 {
+        text-align: center;
+    }
+}
+
+main {
+    padding: 2em;
+    h2 {
+        .headingFont(@headingFont; 2em);
+        
+/*  This changes the arrow to the pointer finger.
+    The "cursor" property has an array of values:
+    cell (like in XL), move, resize, wait, help (?),
+    progress (blue spinner), no-drop */
+        cursor: pointer;
+        cursor: hand;
+    }
+    h3 {
+        .headingFont(@headingFont; 1.5em);
+    }
+    h4 {
+        .headingFont(@headingFont; 1.3em);
+    }
+    h5 {
+        .headingFont(@headingFont; 1.1em);
+    }
+    h6 {
+        .headingFont(@headingFont; 1em);
+        color: @color5;
+        padding-top: 1.5em;
+        text-align: center;
+        text-transform: none;
+    }
+    p {
+        .textSize(1.25em);
+        a {
+            color: dodgerblue;
+        }
+        a:hover {
+            color: darkgray;
+        }
+    }
+    ul {
+        li {
+            display: inline-block;
+            a {
+                display: inline-block;
+                padding: 1em 1em 0 0;
+                text-decoration: none;
+                cursor: pointer;
+                cursor: hand;
+                &:visited,
+                &:link {
+                    color: @color3;
+                }
+            }
+        }
+    }
+// Commented this out so the text blends appropriately.
+//    span {
+//        font-weight: bold;
+//    }
+}
+// These are styles specifically for the Star Wars page.
+.swMain {
+    position: relative;
+    background-color: @darkColor;
+    color: @lightColor;
+    perspective: 200px;
+    h2, h3, p {
+        color: @colorSW;
+        text-align: center;
+        margin: auto;
+        p {
+            .textSize(1.1em);
+        }   
+    }
+}
+// The style for this section is making it look like navigation.
+.swEpisodes {
+    text-align: center;
+    li {
+        display: inline;
+        padding: 1em;
+        a {
+            color: @color3;
+            line-height: 1em;
+            text-decoration: none;
+            .textSize(1.25em);
+        }
+        a:hover {
+            color: @color5;
+        }
+    }
+}
+// This is skewing the Star Wars crawl. It's not animated.
+.swCrawl {
+    transform: rotateX(7deg);
+    padding: 2em;
+    width: 85%;
+    margin: auto;
+}
+.swGuts {
+    width: 90%;
+    margin: auto;
+}
+.swPoster {
+    float: left;
+    margin-left: 3em;
+    margin-right: 3em;
+    margin-top: 1.7em;
+}
+.swStats {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    ul {
+        li {
+            color: @color3;
+            display: inline;
+            line-height: 1.5em;
+        }
+        li:after {
+            content: ", ";
+        }
+        li:last-child:after {
+            content: "";
+        }
+    }
+}
+.posterCredits {
+    a {
+        color: @color3;
+        line-height: 1em;
+        text-decoration: none;
+        .textSize(1em);
+    }
+    a:hover {
+        color: @color5;
+    }
+}
+footer {
+    background-color: @lessDarkColor;
+    clear: both;
+    color: @lightColor;
+    padding: 2em;
+    h2 {
+        .headingFont(@headingFont; 1.5em);
+    }
+    h3 {
+        .headingFont(@headingFont; 1.2em);
+    }
+    h4 {
+        .headingFont(@headingFont; 1.1em);
+    }
+    h5 {
+        .headingFont(@headingFont; 1em);
+    }
+    h6 {
+        .headingFont(@headingFont; .9em);
+    }
+    p, li {
+        .textSize(.8em);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+// If you are good with LESS, you have a clue what's coming up in another module here
+.current() {
+    background-color: @color2;
+}
+
+.highlight {
+    background-color: silver;
+    // Couldn't get the text color to change. Making changes with the inspector
+    // made all of the links' colors change.
+    color: #000000;
+}
+
+/*  This is from W3schools.com ---> CSS Tooltip
+    Create an element that displays when moused over.
+    Its position is realtive to the <div> assigned .tooltip
+    The text's position of absolute will be inherited from this. */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/*  This part is the box with the text in it.
+    position: absolute; allows it to be aligned properly.
+    "top" fudges down so it's aligned with the <div>
+    Everything else is pretty self explanitory. */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 180px;
+    .headingFont(@headingFont; .9em);
+    line-height: 1.2em;
+    background-color: @color2;
+    color: @lightColor;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 1px;
+    left: 105%;
+}
+
+/*  Here's what makes the arrow happen!
+    The empty content creates a box that borders can be applied to.
+    The ::after pseudo-element allows for styling of the empty content box.
+    Similar to the textbox, this is positioned with absolute.
+    top: 50% centers it vertically, right 100% sticks it too the textbox's side.
+    margin-top & border-width must have the same value to keep it vertically centered.
+    border-color is only effecting the right side of the empty box! */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent @color2 transparent transparent;
+}
+
+/*  :hover make the textbox and the empty content box appear on mouseover. */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+#thumbs {
+    margin-left: 1em;
+    img {
+        padding-right: 1em;
+    }
+    img:last-child {
+        padding-right: 0;
+    }
+}
+#largeImg {
+    margin-left: 1em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+#starWarsInfo {
+    h1 {
+        font-family: font71994;         
+    }
+}
+#moviePoster{
+    cursor: progress;
+}
+#colorVar1 {
+    border: solid @darkColor 1px;
+    background-color: @lightColor;
+    color: @darkColor;
+    display: inline-block;
+    font-size: 18px;
+    padding: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    cursor: hand;
+
+}
+#colorVar2 {
+    background-color: lightgrey;
+    border: solid @darkColor 1px; 
+    display: inline-block;
+    font-size: 18px;
+    padding: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    cursor: hand;
+
+}
+#colorVar3 {
+    h1 {
+        color: #000000;
+    }
+    background-color: @darkColor;
+    border: solid @darkColor 1px;    
+    color: @lightColor;
+    display: inline-block;
+    font-size: 18px;
+    padding: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    cursor: hand;
+}
+#firstName {
+    margin-bottom: .5em;
+    padding: .5em;
+}
+#lastName {
+    margin-bottom: .5em;
+    padding: .5em;
+}
+

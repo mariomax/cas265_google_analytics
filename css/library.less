@@ -1,0 +1,18 @@
+
+.textSize(@textSize) {
+    font-size: @textSize;
+    line-height: @textSize * 1.5;
+    margin-bottom: @textSize;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.headingFont(@fontFamily: @headingFont; @fontSize) {
+    font-family: @fontFamily;
+    font-size: @fontSize;
+    line-height: @fontSize;
+    margin-bottom: @fontSize * .5;
+    margin-top: @fontSize * .5;
+    text-transform: uppercase;
+}

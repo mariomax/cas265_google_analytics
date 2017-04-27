@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:url" content="http://www.wario.work/cas265/contact.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="This is 'Open Graph Markup.'">
+    <meta property="og:description" content="Properly formatted open graph metatags will improve the way posts look.">
+    <meta property="og:image" content="http://www.wario.work/cas265/images/cables.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mariojames211">
+    <title>Sample contact page</title>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7COpen+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="css/helper.css" type="text/css">
+    <link rel="stylesheet" href="css/grid.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-97175852-1', 'auto');
+      ga('send', 'pageview', location.pathname);
+    </script>
+</head>
+
+<body>
+    
+    <nav>
+        <ul id="navigationList">
+            <li><a href="index.html" id="homeNav">Home</a></li>
+            <li><a href="photos.html" id="photosNav">Photos</a></li>
+            <li><a href="about.html" id="aboutNav">About</a></li>
+            <li><a href="starwars.html" id="starWarsNav">Star Wars API</a></li>
+            <li><a href="contact.html" id="contactNav">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="centerH1">
+            <h1>Contact Us</h1>
+        </div>
+    </header>
+
+    <main>
+        First Name: <input type="text" name="firstName" id="firstName">
+        <br>
+        Last Name: <input type="text" name="lastName" id="lastName">
+        <br>
+        <input type="submit" id="setPersonalInfo">
+<!-- This is the font size and background color adjustment "navigation" -->
+        <ul>
+            <li><a id="fSize12" style="font-size:12px;">A</a></li>
+            <li><a id="fSize16" style="font-size:16px;">A</a></li>
+            <li><a id="fSize18" style="font-size:18px;">A</a></li>
+            <li><a id="colorVar1">A</a></li>
+            <li><a id="colorVar2">A</a></li>
+            <li><a id="colorVar3">A</a></li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2016 - <span id="currentYear">[placeholder, get the current year]</span>.</p>
+    </footer>
+    
+    <script>
+        $("#setPersonalInfo").on("click", function () {
+            console.log("this is the 'setPersonalInfo' check");
+            sessionStorage.firstName = $("#firstName").get(0).value;
+            sessionStorage.lastName = $("#lastName").get(0).value;
+            ga('send', 'event', 'click');
+            location.reload();
+            });
+    </script>
+    <script src="js/scripts.js"></script>
+    <script>
+        $("#colorVar3").on("click", function () {
+            ga('send', 'event', 'click');
+            console.log("The jQuery event worked!");
+        });
+    </script>
+    <script>
+        $("#firstName").on("click", function () {
+            ga('send', 'event', 'click');
+            console.log("The jQuery event worked!");
+        });
+    </script>
+    <script>
+        $("#lastName").on("click", function () {
+            ga('send', 'event', 'click');
+            console.log("The jQuery event worked!");
+        });
+    </script>
+</body>
+
+</html>

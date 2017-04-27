@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:url" content="http://www.wario.work/cas265/photos.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="This is 'Open Graph Markup.'">
+    <meta property="og:description" content="Properly formatted open graph metatags will improve the way posts look.">
+    <meta property="og:image" content="http://www.wario.work/cas265/images/skyline.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mariojames211">
+    <title>jQuery photo gallery</title>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7COpen+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="css/helper.css" type="text/css">
+    <link rel="stylesheet" href="css/grid.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-97175852-1', 'auto');
+      ga('send', 'pageview', location.pathname);
+    </script>
+</head>
+
+<body>
+
+    <nav>
+        <ul id="navigationList">
+            <li><a href="index.html" id="homeNav">Home</a></li>
+            <li><a href="photos.html" id="photosNav">Photos</a></li>
+            <li><a href="about.html" id="aboutNav">About</a></li>
+            <li><a href="starwars.html" id="starWarsNav">Star Wars API</a></li>
+            <li><a href="contact.html" id="contactNav">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="centerH1">
+            <h1>A jQuery photo gallery exercise</h1>
+        </div>
+    </header>
+
+    <main>
+        <h2>CAS 213's photo gallery:</h2>
+        <div class="tooltip" id="thumbs">
+            <span class="tooltiptext">Click a thumbnail to view a larger version of the image.</span>
+        <img src="images/thumb_architecture.jpg" alt="a building" id="thumb_architecture">
+        <img src="images/thumb_bear.jpg" alt="a bear" id="thumb_bear">
+        <img src="images/thumb_cables.jpg" alt="cables" id="thumb_cables">
+        <img src="images/thumb_car.jpg" alt="a car" id="thumb_car">
+        <img src="images/thumb_cat.jpg" alt="a cat" id="thumb_cat">
+        <img src="images/thumb_dessert.jpg" alt="a dessert" id="thumb_dessert">
+        <img src="images/thumb_sea.jpg" alt="a sea" id="thumb_sea">
+        </div>
+        <div style="width: 747px; height: 497px; background-size: cover;" class="tooltip" id="largeImg">
+            <span class="tooltiptext">Click on the image to view the next image in the gallery.</span>
+        </div>
+<!-- This is the font size and background color adjustment "navigation" -->        
+        <ul>
+            <li><a id="fSize12" style="font-size:12px;">A</a></li>
+            <li><a id="fSize16" style="font-size:16px;">A</a></li>
+            <li><a id="fSize18" style="font-size:18px;">A</a></li>
+            <li><a id="colorVar1">A</a></li>
+            <li><a id="colorVar2">A</a></li>
+            <li><a id="colorVar3">A</a></li>
+        </ul>
+    </main>
+    
+    <footer>
+        <p>Copyright &copy; 2016 - <span id="currentYear">[placeholder, get the current year]</span>.</p>
+    </footer>
+    <script src="js/scripts.js"></script>
+    <script>
+        // $("#theIdName") = uses jQuery to focus on the id
+        // .on() is the event handler. It needs 2 pieces of info:
+        // the name of the event *comma* and the event that happens.
+        // Look for documentation at http://api.jquery.com/css/
+        // Figure out how to change the background image for "largeImg"
+        // When the thumbnail (with #) is clicked, the jQuery function () starts.
+        // $(#"whatever").css("CSS property", "that property's value");
+        $("#thumb_architecture").on("click",
+            function () {
+                $("#largeImg").css("background-image", "url(images/architecture.jpg)");
+            }                    
+        );
+        
+        $("#thumb_bear").on("click",
+            function () {
+                $("#largeImg").css("background-image", "url(images/bear.jpg)");
+            }
+        );
+        
+        $("#thumb_cables").on("click",
+            function () {
+                $("#largeImg").css("background-image", "url(images/cables.jpg)");
+            }
+        );
+        
+        $("#thumb_car").on("click",
+            function () {
+                $("#largeImg").css("background-image", "url(images/car.jpg)");
+            }
+        );
+        
+        $("#thumb_cat").on("click",
+            function () {
+                $("#largeImg").css("background-image", "url(images/cat.jpg)");
+            }
+        );
+        
+        $("#thumb_dessert").on("click",
+            function () {
+                $("#largeImg").css("background-image", "url(images/dessert.jpg)");
+            }
+        );
+        
+        $("#thumb_sea").on("click",
+            function () {
+                $("#largeImg").css("background-image", "url(images/sea.jpg)");
+            }
+        );
+        
+        // This is an array of the 7 full size images (0 -> 6)
+        var storedImg = [
+            "url(images/architecture.jpg)",
+            "url(images/bear.jpg)",
+            "url(images/cables.jpg)",
+            "url(images/car.jpg)",
+            "url(images/cat.jpg)",
+            "url(images/dessert.jpg)",
+            "url(images/sea.jpg)"
+        ]
+        // Similar to the method above, .on("click") starts the function
+        // #"largeImg" gets replaced by the next background-image in the array.
+        // The problem here is that using 0 starts the function at the first image.
+        // Also, it doesn't repeat from the last image back the zeroth image.
+        // A better fix would be to add < and > buttons on the sides.
+        var i = 0
+        $("#largeImg").on("click",
+            function () {
+                $("#largeImg").css("background-image", storedImg[i++]);
+            }
+        );
+    </script>
+    <script>
+        $("#largeImg").on("click", function () {
+            ga('send', 'event', 'click', 'someone clicked the large image');
+            console.log("The jQuery event worked!");
+        });
+    </script>
+</body>
+
+</html>
